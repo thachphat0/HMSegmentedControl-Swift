@@ -49,6 +49,7 @@ class HMSegmentedControl: UIControl {
     var items: [String]
     
     var allowSelectLargerIndexThanCurrent = true
+    var oldIndexImage: UIImage?
     
     /// Height of the selection indicator stripe.
     var selectionIndicatorHeight: CGFloat = 5.0
@@ -180,6 +181,7 @@ class HMSegmentedControl: UIControl {
             button.setAttributedTitle(attributedTitle, for: .selected)
         }
         
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5)
         button.tag = index
         return button
     }
@@ -220,6 +222,18 @@ class HMSegmentedControl: UIControl {
         assert(index < items.count, "Attempting to set index to a segment that does not exist.")
         
         selectedSegmentIndex = index
+        
+        if let image = oldIndexImage {
+            for view in stackView.arrangedSubviews {
+                if let button = view as? UIButton {
+                    if button.tag < selectedSegmentIndex {
+                        button.setImage(image, for: .normal)
+                    } else {
+                        button.setImage(nil, for: .normal)
+                    }
+                }
+            }
+        }
         
         if selectionIndicatorWidthStyle == .dynamic {
             let button = stackView.arrangedSubviews[selectedSegmentIndex] as? UIButton
