@@ -48,6 +48,8 @@ class HMSegmentedControl: UIControl {
     var selectionIndicatorWidthConstraint: NSLayoutConstraint?
     var items: [String]
     
+    var allowSelectLargerIndexThanCurrent = true
+    
     /// Height of the selection indicator stripe.
     var selectionIndicatorHeight: CGFloat = 5.0
     
@@ -165,7 +167,6 @@ class HMSegmentedControl: UIControl {
         let button = UIButton()
         button.setTitle(item, for: .normal)
         button.addTarget(self, action: #selector(HMSegmentedControl.tapped(segmentButton:)), for: .touchUpInside)
-        // TODO: Set button title text attributes to a dictionary property set by the developer
         
         if let titleTextAttributes = titleTextAttributes {
             let attributedTitle = NSAttributedString(string: item, attributes: titleTextAttributes)
@@ -185,6 +186,11 @@ class HMSegmentedControl: UIControl {
     
     func tapped(segmentButton sender: UIButton) {
         let newIndex = sender.tag
+        
+        if !allowSelectLargerIndexThanCurrent && newIndex > selectedSegmentIndex {
+            return
+        }
+        
         let indexChanged: Bool = newIndex != selectedSegmentIndex
         selectedSegmentIndex = newIndex
         

@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectionIndicatorPosition = .bottom
         segmentedControl.selectionIndicatorColor = #colorLiteral(red: 0.1142767668, green: 0.3181744218, blue: 0.4912756383, alpha: 1)
+        segmentedControl.allowSelectLargerIndexThanCurrent = false
         
         segmentedControl.titleTextAttributes = [
             NSForegroundColorAttributeName : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
@@ -46,6 +47,10 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.setSelectedSegmentIndex(2, animated: false)
+    }
+    
+    @IBAction func nextButtonTapped() {
+        segmentedControl.setSelectedSegmentIndex(segmentedControl.selectedSegmentIndex + 1, animated: true)
     }
 
 }
