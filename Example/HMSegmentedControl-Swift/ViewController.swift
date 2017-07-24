@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import HMSegmentedControl
+import HMSegmentedControl_Swift
 
 class ViewController: UIViewController {
     let segmentedControl = HMSegmentedControl(items: ["One", "Two", "Three"])
@@ -34,8 +34,8 @@ class ViewController: UIViewController {
         
         segmentedControl.indexChangedHandler = { index in
             print(index)
-//            print(self.segmentedControl.selectedSegmentIndex)
-//            self.segmentedControl.selectedSegmentIndex = 1
+            //            print(self.segmentedControl.selectedSegmentIndex)
+            //            self.segmentedControl.selectedSegmentIndex = 1
         }
         
         NSLayoutConstraint.activate(
@@ -53,6 +53,6 @@ class ViewController: UIViewController {
     @IBAction func nextButtonTapped() {
         segmentedControl.setSelectedSegmentIndex(segmentedControl.selectedSegmentIndex + 1, animated: true)
     }
-
+    
 }
 

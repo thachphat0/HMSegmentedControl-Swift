@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HMSegmentedControl.xcodeproj">
+      location = "self:HMSegmentedControl-Swift.xcodeproj">
    </FileRef>
 </Workspace>

@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'HMSegmentedControl-Swift_Example' do
+  pod 'HMSegmentedControl-Swift', :path => '../'
+
+  target 'HMSegmentedControl-Swift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,6 @@
+framework module HMSegmentedControl_Swift {
+  umbrella header "HMSegmentedControl-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

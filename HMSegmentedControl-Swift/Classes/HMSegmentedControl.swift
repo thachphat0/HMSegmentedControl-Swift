@@ -17,8 +17,8 @@ import UIKit
 //  * Add delegate callback to configure each button for a state (method should have index, state and button)
 //  * Move selection indicator to its own private class with all of its properties
 
-class HMSegmentedControl: UIControl {
-    enum SelectionIndicatorPosition {
+public class HMSegmentedControl: UIControl {
+    public enum SelectionIndicatorPosition {
         case top
         case bottom
     }
@@ -48,8 +48,8 @@ class HMSegmentedControl: UIControl {
     var selectionIndicatorWidthConstraint: NSLayoutConstraint?
     var items: [String]
     
-    var allowSelectLargerIndexThanCurrent = true
-    var oldIndexImage: UIImage?
+    public var allowSelectLargerIndexThanCurrent = true
+    public var oldIndexImage: UIImage?
     
     /// Height of the selection indicator stripe.
     var selectionIndicatorHeight: CGFloat = 5.0
@@ -57,17 +57,17 @@ class HMSegmentedControl: UIControl {
     var selectionIndicatorWidthStyle: SelectionIndicatorWidthStyle = .fixed
     
     /// Position of the selection indicator stripe.
-    var selectionIndicatorPosition: SelectionIndicatorPosition = .bottom
+    public var selectionIndicatorPosition: SelectionIndicatorPosition = .bottom
     
     /// Color of the selection indicator stripe.
-    var selectionIndicatorColor: UIColor = .black {
+    public var selectionIndicatorColor: UIColor = .black {
         didSet {
             self.selectionIndicator.backgroundColor = selectionIndicatorColor
         }
     }
     
     /// Text attributes to apply to labels of the unselected segments
-    var titleTextAttributes: [String:AnyObject]? {
+    public var titleTextAttributes: [String:AnyObject]? {
         didSet {
             if let titleTextAttributes = titleTextAttributes {
                 set(titleAttributes: titleTextAttributes, forControlState: .normal)
@@ -76,7 +76,7 @@ class HMSegmentedControl: UIControl {
     }
     
     /// Text attributes to apply to labels of the selected segments
-    var selectedTitleTextAttributes: [String:AnyObject]? {
+    public var selectedTitleTextAttributes: [String:AnyObject]? {
         didSet {
             if let selectedTitleTextAttributes = selectedTitleTextAttributes {
                 set(titleAttributes: selectedTitleTextAttributes, forControlState: .selected)
@@ -84,8 +84,8 @@ class HMSegmentedControl: UIControl {
         }
     }
     
-    var indexChangedHandler: ((_ index: Int) -> (Void))?
-    fileprivate(set) var selectedSegmentIndex: Int = 0 {
+    public var indexChangedHandler: ((_ index: Int) -> (Void))?
+    public var selectedSegmentIndex: Int = 0 {
         didSet {
             for button in stackView.arrangedSubviews {
                 if let button = button as? UIButton {
@@ -98,19 +98,19 @@ class HMSegmentedControl: UIControl {
         }
     }
     
-    init(items: [String]) {
+    public init(items: [String]) {
         self.items = items
         
         super.init(frame: CGRect.zero)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         self.items = []
         
         super.init(coder: aDecoder)
     }
     
-    override func updateConstraints() {
+    override public func updateConstraints() {
         NSLayoutConstraint.activate([
             stackView.widthAnchor.constraint(equalTo: widthAnchor),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
@@ -149,7 +149,7 @@ class HMSegmentedControl: UIControl {
         super.updateConstraints()
     }
     
-    override func willMove(toSuperview newSuperview: UIView?) {
+    override public func willMove(toSuperview newSuperview: UIView?) {
         addSubview(stackView)
         addSubview(selectionIndicator)
         bringSubview(toFront: selectionIndicator)

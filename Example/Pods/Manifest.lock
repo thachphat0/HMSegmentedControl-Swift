@@ -1,0 +1,16 @@
+PODS:
+  - HMSegmentedControl-Swift (0.1.0)
+
+DEPENDENCIES:
+  - HMSegmentedControl-Swift (from `../`)
+
+EXTERNAL SOURCES:
+  HMSegmentedControl-Swift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HMSegmentedControl-Swift: 505f41b729ce9de1b89e6289758f01c5a4d20f61
+
+PODFILE CHECKSUM: b7e17901f314824d49cb4589d5607731f616189b
+
+COCOAPODS: 1.2.1

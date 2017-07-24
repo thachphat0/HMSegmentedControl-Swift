@@ -1,0 +1,22 @@
+{
+  "name": "HMSegmentedControl-Swift",
+  "version": "0.1.0",
+  "summary": "A short description of HMSegmentedControl-Swift.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/thachphat0/HMSegmentedControl-Swift",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "thachphat0": "thachphat0@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/thachphat0/HMSegmentedControl-Swift.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "HMSegmentedControl-Swift/Classes/**/*"
+}
