@@ -46,7 +46,7 @@ public class HMSegmentedControl: UIControl {
     
     var selectionIndicatorLeadingConstraint: NSLayoutConstraint?
     var selectionIndicatorWidthConstraint: NSLayoutConstraint?
-    var items: [String]
+    public var items: [String]
     
     public var allowSelectLargerIndexThanCurrent = true
     public var oldIndexImage: UIImage?
