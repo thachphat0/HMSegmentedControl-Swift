@@ -23,7 +23,7 @@ public class HMSegmentedControl: UIControl {
         case bottom
     }
     
-    enum SelectionIndicatorWidthStyle {
+    public enum SelectionIndicatorWidthStyle {
         case dynamic // Selection indicator is equal to the segment's label width.
         case fixed // Selection indicator is equal to the full width of the segment.
     }
@@ -54,7 +54,7 @@ public class HMSegmentedControl: UIControl {
     /// Height of the selection indicator stripe.
     var selectionIndicatorHeight: CGFloat = 5.0
     
-    var selectionIndicatorWidthStyle: SelectionIndicatorWidthStyle = .fixed
+    public var selectionIndicatorWidthStyle: SelectionIndicatorWidthStyle = .fixed
     
     /// Position of the selection indicator stripe.
     public var selectionIndicatorPosition: SelectionIndicatorPosition = .bottom
