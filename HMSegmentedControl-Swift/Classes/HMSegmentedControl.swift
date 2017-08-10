@@ -90,6 +90,14 @@ public class HMSegmentedControl: UIControl {
             for button in stackView.arrangedSubviews {
                 if let button = button as? UIButton {
                     button.isSelected = false
+                    
+                    if let image = oldIndexImage {
+                        if button.tag < selectedSegmentIndex {
+                            button.setImage(image, for: .normal)
+                        } else {
+                            button.setImage(nil, for: .normal)
+                        }
+                    }
                 }
             }
             
@@ -222,18 +230,6 @@ public class HMSegmentedControl: UIControl {
         assert(index < items.count, "Attempting to set index to a segment that does not exist.")
         
         selectedSegmentIndex = index
-        
-        if let image = oldIndexImage {
-            for view in stackView.arrangedSubviews {
-                if let button = view as? UIButton {
-                    if button.tag < selectedSegmentIndex {
-                        button.setImage(image, for: .normal)
-                    } else {
-                        button.setImage(nil, for: .normal)
-                    }
-                }
-            }
-        }
         
         if selectionIndicatorWidthStyle == .dynamic {
             let button = stackView.arrangedSubviews[selectedSegmentIndex] as? UIButton
