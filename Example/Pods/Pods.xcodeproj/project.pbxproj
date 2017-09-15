@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		026DB5EE3B870353925E575DC0398864 /* Pods-HMSegmentedControl-Swift_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DD1C4E63589399573DFEBA6D8FBB902 /* Pods-HMSegmentedControl-Swift_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		446EE0FE9976218A99C0B58D72E19618 /* Pods-HMSegmentedControl-Swift_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D5A1E0B72B1FD6831E87C5E903126094 /* Pods-HMSegmentedControl-Swift_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		66EBC12D1F6C84F3007F0D5E /* HMSegmentedControl+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBC12C1F6C84F3007F0D5E /* HMSegmentedControl+String.swift */; };
 		6A2A9BBC400F79E75D46BAC65D4047A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		738654B69B080FE1DB6B8749380B73E2 /* Pods-HMSegmentedControl-Swift_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B80D8423D9F02C34ACE32C495AF7274 /* Pods-HMSegmentedControl-Swift_Example-dummy.m */; };
 		7FE54CE7C2337E16628825EF3A727B70 /* HMSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224737BD81CE0EF97DB7E6CAE8AAF043 /* HMSegmentedControl.swift */; };
@@ -30,25 +31,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F28EC7EA5012C596569F8A8EEFF23AF /* Pods-HMSegmentedControl-Swift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-HMSegmentedControl-Swift_Example.modulemap"; sourceTree = "<group>"; };
+		0F28EC7EA5012C596569F8A8EEFF23AF /* Pods-HMSegmentedControl-Swift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HMSegmentedControl-Swift_Example.modulemap"; sourceTree = "<group>"; };
 		1FC5B2E1202F27238EFB9A1085794417 /* Pods-HMSegmentedControl-Swift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HMSegmentedControl-Swift_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		20971ADCB4E177800B561828725AC39A /* Pods-HMSegmentedControl-Swift_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HMSegmentedControl-Swift_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		224737BD81CE0EF97DB7E6CAE8AAF043 /* HMSegmentedControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HMSegmentedControl.swift; sourceTree = "<group>"; };
-		29BE19FAF435CDB389F4AF904864CEE7 /* HMSegmentedControl-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "HMSegmentedControl-Swift.modulemap"; sourceTree = "<group>"; };
+		29BE19FAF435CDB389F4AF904864CEE7 /* HMSegmentedControl-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "HMSegmentedControl-Swift.modulemap"; sourceTree = "<group>"; };
 		2DD1C4E63589399573DFEBA6D8FBB902 /* Pods-HMSegmentedControl-Swift_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HMSegmentedControl-Swift_Tests-umbrella.h"; sourceTree = "<group>"; };
 		2E404C852702849253A559B80C09B22F /* HMSegmentedControl-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HMSegmentedControl-Swift-umbrella.h"; sourceTree = "<group>"; };
 		4927B544F2194E4F40964F4AE51541C5 /* HMSegmentedControl-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HMSegmentedControl-Swift-dummy.m"; sourceTree = "<group>"; };
 		56EA88DADC9ADD667A6D90594409D742 /* Pods-HMSegmentedControl-Swift_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HMSegmentedControl-Swift_Tests-dummy.m"; sourceTree = "<group>"; };
-		5B3BDF6BA144D6EF0B9122D5902600C8 /* HMSegmentedControl_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HMSegmentedControl_Swift.framework; path = "HMSegmentedControl-Swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E0583610944A9ABFAD993DB6B396B41 /* Pods-HMSegmentedControl-Swift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-HMSegmentedControl-Swift_Tests.modulemap"; sourceTree = "<group>"; };
+		5B3BDF6BA144D6EF0B9122D5902600C8 /* HMSegmentedControl_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HMSegmentedControl_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E0583610944A9ABFAD993DB6B396B41 /* Pods-HMSegmentedControl-Swift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HMSegmentedControl-Swift_Tests.modulemap"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		66EBC12C1F6C84F3007F0D5E /* HMSegmentedControl+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HMSegmentedControl+String.swift"; sourceTree = "<group>"; };
 		675808313EA1CD803DB4ABFACFDB54FF /* HMSegmentedControl-Swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "HMSegmentedControl-Swift.xcconfig"; sourceTree = "<group>"; };
 		6B0E3B9811C5A92C2168C853A77F0DDF /* Pods-HMSegmentedControl-Swift_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HMSegmentedControl-Swift_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6B80D8423D9F02C34ACE32C495AF7274 /* Pods-HMSegmentedControl-Swift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HMSegmentedControl-Swift_Example-dummy.m"; sourceTree = "<group>"; };
-		82232557994DAC76824CF324C62E1BF7 /* Pods_HMSegmentedControl_Swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HMSegmentedControl_Swift_Tests.framework; path = "Pods-HMSegmentedControl-Swift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82232557994DAC76824CF324C62E1BF7 /* Pods_HMSegmentedControl_Swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSegmentedControl_Swift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F4C854783C863E96175093656334A8F /* Pods-HMSegmentedControl-Swift_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HMSegmentedControl-Swift_Example-frameworks.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A0D774A7936A1BBBE65A96D9494407E2 /* Pods_HMSegmentedControl_Swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HMSegmentedControl_Swift_Example.framework; path = "Pods-HMSegmentedControl-Swift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A0D774A7936A1BBBE65A96D9494407E2 /* Pods_HMSegmentedControl_Swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSegmentedControl_Swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9BC74D42652160C36FD18F17B6A5E98 /* Pods-HMSegmentedControl-Swift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HMSegmentedControl-Swift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		AC6AAD872FD33585FE5FBE06A480B58D /* Pods-HMSegmentedControl-Swift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HMSegmentedControl-Swift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDAC97736BC514913F59C2A854CF24D /* Pods-HMSegmentedControl-Swift_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HMSegmentedControl-Swift_Example-resources.sh"; sourceTree = "<group>"; };
@@ -111,7 +113,6 @@
 			children = (
 				1767F9913904F3D3EC377734E64AEFD2 /* Classes */,
 			);
-			name = "HMSegmentedControl-Swift";
 			path = "HMSegmentedControl-Swift";
 			sourceTree = "<group>";
 		};
@@ -119,8 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				224737BD81CE0EF97DB7E6CAE8AAF043 /* HMSegmentedControl.swift */,
+				66EBC12C1F6C84F3007F0D5E /* HMSegmentedControl+String.swift */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -341,6 +342,7 @@
 			files = (
 				CDEE8893D4FBE1B480156A3FDC918D67 /* HMSegmentedControl-Swift-dummy.m in Sources */,
 				7FE54CE7C2337E16628825EF3A727B70 /* HMSegmentedControl.swift in Sources */,
+				66EBC12D1F6C84F3007F0D5E /* HMSegmentedControl+String.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

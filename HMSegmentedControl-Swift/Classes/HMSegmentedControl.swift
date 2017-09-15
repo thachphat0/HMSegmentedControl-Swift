@@ -28,6 +28,7 @@ public class HMSegmentedControl: UIControl {
         case fixed // Selection indicator is equal to the full width of the segment.
     }
     
+    var scrollView = UIScrollView()
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -103,6 +104,8 @@ public class HMSegmentedControl: UIControl {
             
             let selectedButton = stackView.arrangedSubviews[selectedSegmentIndex] as! UIButton
             selectedButton.isSelected = true
+            
+            scrollView.scrollRectToVisible(selectedButton.frame, animated: true)
         }
     }
     
@@ -119,11 +122,17 @@ public class HMSegmentedControl: UIControl {
     }
     
     override public func updateConstraints() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(equalTo: widthAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
             ])
         
         
@@ -158,7 +167,8 @@ public class HMSegmentedControl: UIControl {
     }
     
     override public func willMove(toSuperview newSuperview: UIView?) {
-        addSubview(stackView)
+        addSubview(scrollView)
+        scrollView.addSubview(stackView)
         addSubview(selectionIndicator)
         bringSubview(toFront: selectionIndicator)
         
@@ -191,6 +201,7 @@ public class HMSegmentedControl: UIControl {
         
         button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5)
         button.tag = index
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         return button
     }
     
@@ -246,7 +257,7 @@ public class HMSegmentedControl: UIControl {
             let segmentWidth = stackView.frame.size.width / CGFloat(items.count)
             selectionIndicatorLeadingConstraint?.constant = segmentWidth * CGFloat(index)
         }
-    
+        
         if animated {
             UIView.animate(withDuration: 0.25, animations: {
                 self.layoutIfNeeded()
