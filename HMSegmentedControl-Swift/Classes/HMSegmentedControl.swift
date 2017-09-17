@@ -109,9 +109,8 @@ public class HMSegmentedControl: UIControl {
         }
     }
     
-    public init(items: [String], oldIndexImage: UIImage? = nil) {
+    public init(items: [String]) {
         self.items = items
-        self.oldIndexImage = oldIndexImage
         
         super.init(frame: CGRect.zero)
     }
@@ -164,6 +163,15 @@ public class HMSegmentedControl: UIControl {
             selectionIndicatorLeadingConstraint!
             ])
         
+        let font = (titleTextAttributes?[NSFontAttributeName] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
+        var maxWidth = (items.max(by: { $0.0.width(withConstraintedHeight: 1, font: font) < $0.1.width(withConstraintedHeight: 1, font: font) })?.width(withConstraintedHeight: 1, font: font))! + 10
+        if let image = oldIndexImage {
+            maxWidth += image.size.width
+        }
+        for button in stackView.arrangedSubviews {
+            button.widthAnchor.constraint(equalToConstant: maxWidth).isActive = true
+        }
+        
         super.updateConstraints()
     }
     
@@ -177,14 +185,8 @@ public class HMSegmentedControl: UIControl {
     }
     
     func addButtons(forItems items: [String]) {
-        let font = (titleTextAttributes?[NSFontAttributeName] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
-        var maxWidth = (items.max(by: { $0.0.width(withConstraintedHeight: 1, font: font) < $0.1.width(withConstraintedHeight: 1, font: font) })?.width(withConstraintedHeight: 1, font: font))! + 20
-        if let image = oldIndexImage {
-            maxWidth += image.size.width
-        }
         for (index, item) in items.enumerated() {
             let buttonView = button(forItem: item, atIndex: index)
-            buttonView.widthAnchor.constraint(equalToConstant: maxWidth).isActive = true
             stackView.addArrangedSubview(buttonView)
         }
     }
