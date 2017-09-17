@@ -109,8 +109,9 @@ public class HMSegmentedControl: UIControl {
         }
     }
     
-    public init(items: [String]) {
+    public init(items: [String], oldIndexImage: UIImage? = nil) {
         self.items = items
+        self.oldIndexImage = oldIndexImage
         
         super.init(frame: CGRect.zero)
     }
@@ -176,8 +177,14 @@ public class HMSegmentedControl: UIControl {
     }
     
     func addButtons(forItems items: [String]) {
+        let font = (titleTextAttributes?[NSFontAttributeName] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
+        var maxWidth = (items.max(by: { $0.0.width(withConstraintedHeight: 1, font: font) < $0.1.width(withConstraintedHeight: 1, font: font) })?.width(withConstraintedHeight: 1, font: font))! + 20
+        if let image = oldIndexImage {
+            maxWidth += image.size.width
+        }
         for (index, item) in items.enumerated() {
             let buttonView = button(forItem: item, atIndex: index)
+            buttonView.widthAnchor.constraint(equalToConstant: maxWidth).isActive = true
             stackView.addArrangedSubview(buttonView)
         }
     }
@@ -201,7 +208,6 @@ public class HMSegmentedControl: UIControl {
         
         button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5)
         button.tag = index
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         return button
     }
     
