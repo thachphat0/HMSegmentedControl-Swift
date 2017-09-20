@@ -147,12 +147,9 @@ public class HMSegmentedControl: UIControl {
         }
         
         if selectionIndicatorWidthStyle == .dynamic {
-            let button = stackView.arrangedSubviews[selectedSegmentIndex] as? UIButton
-            
-            if let titleLabel = button?.titleLabel {
-                selectionIndicatorLeadingConstraint = selectionIndicator.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor)
-                selectionIndicatorWidthConstraint = selectionIndicator.widthAnchor.constraint(equalTo: titleLabel.widthAnchor)
-            }
+            let button = stackView.arrangedSubviews[selectedSegmentIndex]
+            selectionIndicatorLeadingConstraint = selectionIndicator.leadingAnchor.constraint(equalTo: button.leadingAnchor)
+            selectionIndicatorWidthConstraint = selectionIndicator.widthAnchor.constraint(equalTo: button.widthAnchor)
         } else {
             selectionIndicatorLeadingConstraint = selectionIndicator.leadingAnchor.constraint(equalTo: stackView.leadingAnchor)
             selectionIndicatorWidthConstraint = selectionIndicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0 / CGFloat(items.count))
@@ -167,19 +164,36 @@ public class HMSegmentedControl: UIControl {
         
         let font = (titleTextAttributes?[NSFontAttributeName] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
         
-        let widths = items.map({ $0.width(withConstraintedHeight: 1, font: font) })
+        var widths = items.enumerated().map({ (offset, item) -> (Int, CGFloat) in
+            var width = item.width(withConstraintedHeight: 1, font: font)
+            if let image = oldIndexImage {
+                width += image.size.width
+            }
+            width += buttonHorizontalInset * 2
+            return (offset, width)
+        })
         
-        let totalWidth = widths.reduce(0, +) + buttonHorizontalInset * 2 * CGFloat(widths.count)
+        var totalWidth = widths.reduce(0, {$0.0 + $0.1.1})
         if totalWidth <= UIScreen.main.bounds.width - horizontalOffset * 2 {
-            for (index, button) in stackView.arrangedSubviews.enumerated() {
-                var width = widths[index] + buttonHorizontalInset * 2
-                if let image = oldIndexImage {
-                    width += image.size.width
-                }
-                button.widthAnchor.constraint(equalToConstant: width).isActive = true
+            totalWidth = UIScreen.main.bounds.width - horizontalOffset * 2
+            var max = widths.enumerated().max(by: { $0.element.1 < $1.element.1 }) ?? (0, (0, 0))
+            
+            while max.element.1 > totalWidth / CGFloat(widths.count) {
+                max.element.1 += buttonHorizontalInset * 2
+                stackView.arrangedSubviews[max.offset].widthAnchor.constraint(equalToConstant: max.element.1).isActive = true
+                widths.remove(at: max.offset)
+                
+                totalWidth -= max.element.1
+                
+                max = widths.enumerated().max(by: { $0.element.1 < $1.element.1 }) ?? (0, (0, 0))
+            }
+            
+            let averageWidth = totalWidth / CGFloat(widths.count)
+            for width in widths {
+                stackView.arrangedSubviews[width.0].widthAnchor.constraint(equalToConstant: averageWidth).isActive = true
             }
         } else {
-            var maxWidth = widths.max() ?? 0
+            var maxWidth = widths.max(by: { $0.0.1 < $0.1.1 }).map({ $0.1 }) ?? 0
             if let image = oldIndexImage {
                 maxWidth += image.size.width
             }
@@ -267,16 +281,13 @@ public class HMSegmentedControl: UIControl {
         selectedSegmentIndex = index
         
         if selectionIndicatorWidthStyle == .dynamic {
-            let button = stackView.arrangedSubviews[selectedSegmentIndex] as? UIButton
+            removeConstraints([selectionIndicatorWidthConstraint!, selectionIndicatorLeadingConstraint!])
             
-            if let titleLabel = button?.titleLabel {
-                removeConstraints([selectionIndicatorWidthConstraint!, selectionIndicatorLeadingConstraint!])
-                
-                selectionIndicatorLeadingConstraint = selectionIndicator.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor)
-                selectionIndicatorWidthConstraint = selectionIndicator.widthAnchor.constraint(equalTo: titleLabel.widthAnchor)
-                
-                NSLayoutConstraint.activate([selectionIndicatorWidthConstraint!, selectionIndicatorLeadingConstraint!])
-            }
+            let button = stackView.arrangedSubviews[selectedSegmentIndex]
+            selectionIndicatorLeadingConstraint = selectionIndicator.leadingAnchor.constraint(equalTo: button.leadingAnchor)
+            selectionIndicatorWidthConstraint = selectionIndicator.widthAnchor.constraint(equalTo: button.widthAnchor)
+            
+            NSLayoutConstraint.activate([selectionIndicatorWidthConstraint!, selectionIndicatorLeadingConstraint!])
         } else {
             let segmentWidth = stackView.frame.size.width / CGFloat(items.count)
             selectionIndicatorLeadingConstraint?.constant = segmentWidth * CGFloat(index)
