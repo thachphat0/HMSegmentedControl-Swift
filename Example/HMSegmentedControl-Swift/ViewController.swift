@@ -10,7 +10,7 @@ import UIKit
 import HMSegmentedControl_Swift
 
 class ViewController: UIViewController {
-    let segmentedControl = HMSegmentedControl(items: ["One", "Two", "Three"])
+    let segmentedControl = HMSegmentedControl(items: ["One", "Two", "Three", "four rararar", "five"])
     
     override func viewDidLoad() {
         view.addSubview(segmentedControl)
@@ -19,17 +19,18 @@ class ViewController: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectionIndicatorPosition = .bottom
         segmentedControl.selectionIndicatorColor = #colorLiteral(red: 0.1142767668, green: 0.3181744218, blue: 0.4912756383, alpha: 1)
-        segmentedControl.allowSelectLargerIndexThanCurrent = false
+        segmentedControl.selectionIndicatorWidthStyle = .dynamic
+        //segmentedControl.allowSelectLargerIndexThanCurrent = false
         segmentedControl.oldIndexImage = #imageLiteral(resourceName: "ic_tick")
         
         segmentedControl.titleTextAttributes = [
-            NSForegroundColorAttributeName : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-            NSFontAttributeName : UIFont.systemFont(ofSize: 17)
+            NSAttributedStringKey.foregroundColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)
         ]
         
         segmentedControl.selectedTitleTextAttributes = [
-            NSForegroundColorAttributeName : #colorLiteral(red: 0.05439098924, green: 0.1344551742, blue: 0.1884709597, alpha: 1),
-            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17)
+            NSAttributedStringKey.foregroundColor : #colorLiteral(red: 0.05439098924, green: 0.1344551742, blue: 0.1884709597, alpha: 1),
+            NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17)
         ]
         
         segmentedControl.indexChangedHandler = { index in

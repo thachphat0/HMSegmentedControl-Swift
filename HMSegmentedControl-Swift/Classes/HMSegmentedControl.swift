@@ -68,7 +68,7 @@ public class HMSegmentedControl: UIControl {
     }
     
     /// Text attributes to apply to labels of the unselected segments
-    public var titleTextAttributes: [String:AnyObject]? {
+    public var titleTextAttributes: [NSAttributedStringKey: Any]? {
         didSet {
             if let titleTextAttributes = titleTextAttributes {
                 set(titleAttributes: titleTextAttributes, forControlState: .normal)
@@ -77,7 +77,7 @@ public class HMSegmentedControl: UIControl {
     }
     
     /// Text attributes to apply to labels of the selected segments
-    public var selectedTitleTextAttributes: [String:AnyObject]? {
+    public var selectedTitleTextAttributes: [NSAttributedStringKey: Any]? {
         didSet {
             if let selectedTitleTextAttributes = selectedTitleTextAttributes {
                 set(titleAttributes: selectedTitleTextAttributes, forControlState: .selected)
@@ -163,8 +163,8 @@ public class HMSegmentedControl: UIControl {
             selectionIndicatorLeadingConstraint!
             ])
         
-        let font = (titleTextAttributes?[NSFontAttributeName] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
-        var maxWidth = (items.max(by: { $0.0.width(withConstraintedHeight: 1, font: font) < $0.1.width(withConstraintedHeight: 1, font: font) })?.width(withConstraintedHeight: 1, font: font))! + 10
+        let font = (titleTextAttributes?[NSAttributedStringKey.font] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
+        var maxWidth = (items.max(by: { $0.width(withConstraintedHeight: 1, font: font) < $1.width(withConstraintedHeight: 1, font: font) })?.width(withConstraintedHeight: 1, font: font))! + 10
         if let image = oldIndexImage {
             maxWidth += image.size.width
         }
@@ -213,7 +213,7 @@ public class HMSegmentedControl: UIControl {
         return button
     }
     
-    func tapped(segmentButton sender: UIButton) {
+    @objc func tapped(segmentButton sender: UIButton) {
         let newIndex = sender.tag
         
         if !allowSelectLargerIndexThanCurrent && newIndex > selectedSegmentIndex {
@@ -230,7 +230,7 @@ public class HMSegmentedControl: UIControl {
         setSelectedSegmentIndex(newIndex, animated: true)
     }
     
-    func set(titleAttributes attributes: [String:AnyObject], forControlState state: UIControlState) {
+    func set(titleAttributes attributes: [NSAttributedStringKey: Any], forControlState state: UIControlState) {
         for button in stackView.arrangedSubviews {
             if let button = button as? UIButton, let title = button.title(for: state) {
                 let attributedTitle = NSAttributedString(string: title, attributes: attributes)
