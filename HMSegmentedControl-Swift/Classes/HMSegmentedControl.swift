@@ -33,7 +33,7 @@ public class HMSegmentedControl: UIControl {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         
         return stackView
     }()
@@ -51,6 +51,8 @@ public class HMSegmentedControl: UIControl {
     
     public var allowSelectLargerIndexThanCurrent = true
     public var oldIndexImage: UIImage?
+    public var horizontalOffset: CGFloat = 0
+    public var buttonHorizontalInset: CGFloat = 5
     
     /// Height of the selection indicator stripe.
     var selectionIndicatorHeight: CGFloat = 5.0
@@ -164,12 +166,26 @@ public class HMSegmentedControl: UIControl {
             ])
         
         let font = (titleTextAttributes?[NSAttributedStringKey.font] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
-        var maxWidth = (items.max(by: { $0.width(withConstraintedHeight: 1, font: font) < $1.width(withConstraintedHeight: 1, font: font) })?.width(withConstraintedHeight: 1, font: font))! + 10
-        if let image = oldIndexImage {
-            maxWidth += image.size.width
-        }
-        for button in stackView.arrangedSubviews {
-            button.widthAnchor.constraint(equalToConstant: maxWidth).isActive = true
+        
+        let widths = items.map({ $0.width(withConstraintedHeight: 1, font: font) })
+        
+        let totalWidth = widths.reduce(0, +) + buttonHorizontalInset * 2 * CGFloat(widths.count)
+        if totalWidth <= UIScreen.main.bounds.width - horizontalOffset * 2 {
+            for (index, button) in stackView.arrangedSubviews.enumerated() {
+                var width = widths[index] + buttonHorizontalInset * 2
+                if let image = oldIndexImage {
+                    width += image.size.width
+                }
+                button.widthAnchor.constraint(equalToConstant: width).isActive = true
+            }
+        } else {
+            var maxWidth = widths.max() ?? 0
+            if let image = oldIndexImage {
+                maxWidth += image.size.width
+            }
+            for button in stackView.arrangedSubviews {
+                button.widthAnchor.constraint(equalToConstant: maxWidth).isActive = true
+            }
         }
         
         super.updateConstraints()
