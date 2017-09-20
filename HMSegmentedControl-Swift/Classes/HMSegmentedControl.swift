@@ -70,7 +70,7 @@ public class HMSegmentedControl: UIControl {
     }
     
     /// Text attributes to apply to labels of the unselected segments
-    public var titleTextAttributes: [NSAttributedStringKey: Any]? {
+    public var titleTextAttributes: [String:AnyObject]? {
         didSet {
             if let titleTextAttributes = titleTextAttributes {
                 set(titleAttributes: titleTextAttributes, forControlState: .normal)
@@ -79,7 +79,7 @@ public class HMSegmentedControl: UIControl {
     }
     
     /// Text attributes to apply to labels of the selected segments
-    public var selectedTitleTextAttributes: [NSAttributedStringKey: Any]? {
+    public var selectedTitleTextAttributes: [String:AnyObject]? {
         didSet {
             if let selectedTitleTextAttributes = selectedTitleTextAttributes {
                 set(titleAttributes: selectedTitleTextAttributes, forControlState: .selected)
@@ -165,7 +165,7 @@ public class HMSegmentedControl: UIControl {
             selectionIndicatorLeadingConstraint!
             ])
         
-        let font = (titleTextAttributes?[NSAttributedStringKey.font] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
+        let font = (titleTextAttributes?[NSFontAttributeName] ?? UIFont.systemFont(ofSize: 15)) as! UIFont
         
         let widths = items.map({ $0.width(withConstraintedHeight: 1, font: font) })
         
@@ -229,7 +229,7 @@ public class HMSegmentedControl: UIControl {
         return button
     }
     
-    @objc func tapped(segmentButton sender: UIButton) {
+    func tapped(segmentButton sender: UIButton) {
         let newIndex = sender.tag
         
         if !allowSelectLargerIndexThanCurrent && newIndex > selectedSegmentIndex {
@@ -246,7 +246,7 @@ public class HMSegmentedControl: UIControl {
         setSelectedSegmentIndex(newIndex, animated: true)
     }
     
-    func set(titleAttributes attributes: [NSAttributedStringKey: Any], forControlState state: UIControlState) {
+    func set(titleAttributes attributes: [String:AnyObject], forControlState state: UIControlState) {
         for button in stackView.arrangedSubviews {
             if let button = button as? UIButton, let title = button.title(for: state) {
                 let attributedTitle = NSAttributedString(string: title, attributes: attributes)
